@@ -11,6 +11,7 @@ pragma solidity ^0.8.17;
 // 4. випускати подію "NewContact" кожен раз, коли додається новий контакт.
 
 contract ContactBook {
+    
     string private _name;
     address private _address;
     address[] _bookArray;
@@ -25,7 +26,7 @@ contract ContactBook {
         require(msg.sender != personAddress, "Owner can't add him self.");
         _bookArray.push(personAddress);
         bookMap[personAddress] = personName;
-        new NewContact(personName, personAddress);
+        emit NewContact(personName, personAddress);
     }
     
     function getContactAddressByIndex(uint256 index) public view returns(address){
@@ -46,5 +47,5 @@ contract ContactBook {
         _;
     }
 
-    event NewContact(string personName, address personAddress)
+    event NewContact(string personName, address personAddress);
 }
