@@ -32,13 +32,13 @@ contract ContactBook {
         return _bookArray[index];
     }
 
-    function getContactNameByAddrees(address personAddress) public view returns(string memory){
+    function getContactNameByAddress(address personAddress) public view returns(string memory){
         return bookMap[personAddress];
     }
 
     
     function getContactNameByindex(uint256 index) public view returns(string memory){
-        return getContactNameByAddrees(getContactAddressByIndex(index));
+        return getContactNameByAddress(getContactAddressByIndex(index));
     }
 
     modifier onlyOner{
