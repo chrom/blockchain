@@ -22,27 +22,28 @@ contract ContactBook {
         _address = msg.sender;
     }
 
-    function addContact(string memory personName, address personAddress) public onlyOner {
+    function addContact(string memory personName, address personAddress) public onlyOner returns (uint) {
         require(msg.sender != personAddress, "Owner can't add him self.");
         _bookArray.push(personAddress);
         bookMap[personAddress] = personName;
         emit NewContact(personName, personAddress);
+        return _bookArray.length-1;
     }
     
-    function getContactAddressByIndex(uint256 index) public view returns(address){
+    function getContactAddressByIndex(uint256 index) public view returns (address) {
         return _bookArray[index];
     }
 
-    function getContactNameByAddress(address personAddress) public view returns(string memory){
+    function getContactNameByAddress(address personAddress) public view returns (string memory) {
         return bookMap[personAddress];
     }
 
     
-    function getContactNameByindex(uint256 index) public view returns(string memory){
+    function getContactNameByindex(uint256 index) public view returns (string memory){
         return getContactNameByAddress(getContactAddressByIndex(index));
     }
 
-    modifier onlyOner{
+    modifier onlyOner {
         require(msg.sender == _address, "Add contact can only owner");
         _;
     }
