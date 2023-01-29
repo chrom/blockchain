@@ -46,7 +46,7 @@ module.exports = async (deployer, network, accounts) => {
 
 async function feedAnimal(farmer, animal, nutrition) {
     try{
-        await farmer.feed(cow.address, nutrition);
+        await farmer.feed(animal.address, nutrition);
         console.log(`Feeding animal by name '${await animal.getName()}' will eat: ${nutrition}`);
     } catch (e) {
         console.log(`Feeding animal by name '${await animal.getName()}' won't eat eat: ${nutrition}`);
