@@ -73,7 +73,7 @@ abstract contract Omnivorous is Animal, HasName {
 
 }
 
-contract Dog is Carnivorous {
+contract Dog is Omnivorous {
 
     constructor(string memory name) HasName(name){
     }
