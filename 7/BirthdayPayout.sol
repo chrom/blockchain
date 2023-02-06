@@ -26,7 +26,7 @@ contract BirthdayPayout {
 
     Teammate[] public _teammates;
 
-    uint256 constant PRESENT = 1;
+    uint256 constant PRESENT = 100000000000000000;
 
     mapping(address => uint) public sent;
 
@@ -62,9 +62,7 @@ contract BirthdayPayout {
     function checkBirthday(uint256 index) view public returns (bool){
         uint256 today = block.timestamp;
         (uint256 birthday_year, uint256 birthday_month,uint256 birthday_day) = getDate(getTeammate(index).birthday);
-
         (uint256 today_year, uint256 today_month, uint256 today_day) = getDate(today);
-
         if (birthday_day == today_day && birthday_month == today_month && birthday_year != today_year) {
             return true;
         }
@@ -89,7 +87,6 @@ contract BirthdayPayout {
     }
 
     function sendToTeammate(uint256 index) public onlyOwner {
-        // Check whether current balance if enough for sending a present
         require(address(this).balance >= PRESENT, "Contract balance is low");
         payable(_teammates[index].account).transfer(PRESENT);
     }
